@@ -41,14 +41,14 @@
 + ## Project Structure
 + 
 +```
-+src/
-+├── components/       # Reusable UI components
-+├── data/             # Mock data for the application
-+├── pages/            # Application pages
-+├── redux/            # Redux store and slices
-+│   └── slices/       # Redux slices for state management
-+├── App.js            # Main application component
-+└── index.js          # Application entry point
++ src/
++ ├── components/       # Reusable UI components
++ ├── data/             # Mock data for the application
++ ├── pages/            # Application pages
++ ├── redux/            # Redux store and slices
++ │   └── slices/       # Redux slices for state management
++ ├── App.js            # Main application component
++ └── index.js          # Application entry point
 +```
 +
 + ## Future Enhancements
