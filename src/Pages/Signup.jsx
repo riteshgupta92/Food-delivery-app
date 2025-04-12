@@ -10,7 +10,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isAuthenticated, error } = useSelector(state => state.auth);
-  const {showToast}=useToast();
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,7 +18,7 @@ const Signup = () => {
     confirmPassword: '',
     agreeTerms: false
   });
-  
+
   const [formErrors, setFormErrors] = useState({
     name: '',
     email: '',
@@ -26,26 +26,21 @@ const Signup = () => {
     confirmPassword: '',
     agreeTerms: ''
   });
-  
-  // Redirect if already authenticated
+
+  // Clear any errors when component unmounts
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/');
-    }
-    
-    // Clear any previous errors
     return () => {
       dispatch(clearError());
     };
-  }, [isAuthenticated, navigate, dispatch]);
-  
+  }, [dispatch]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-    
+
     // Clear error when user starts typing
     if (formErrors[name]) {
       setFormErrors(prev => ({
@@ -54,23 +49,23 @@ const Signup = () => {
       }));
     }
   };
-  
+
   const validateForm = () => {
     let valid = true;
-    const newErrors = { 
+    const newErrors = {
       name: '',
       email: '',
       password: '',
       confirmPassword: '',
       agreeTerms: ''
     };
-    
+
     // Name validation
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
       valid = false;
     }
-    
+
     // Email validation
     if (!formData.email) {
       newErrors.email = 'Email is required';
@@ -79,7 +74,7 @@ const Signup = () => {
       newErrors.email = 'Email is invalid';
       valid = false;
     }
-    
+
     // Password validation
     if (!formData.password) {
       newErrors.password = 'Password is required';
@@ -88,7 +83,7 @@ const Signup = () => {
       newErrors.password = 'Password must be at least 6 characters';
       valid = false;
     }
-    
+
     // Confirm password validation
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = 'Please confirm your password';
@@ -97,20 +92,20 @@ const Signup = () => {
       newErrors.confirmPassword = 'Passwords do not match';
       valid = false;
     }
-    
+
     // Terms agreement validation
     if (!formData.agreeTerms) {
       newErrors.agreeTerms = 'You must agree to the terms and conditions';
       valid = false;
     }
-    
+
     setFormErrors(newErrors);
     return valid;
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       // For demo purposes, we'll just simulate a successful signup
       // In a real app, you would make an API call here
@@ -130,7 +125,7 @@ const Signup = () => {
     <div className="pt-24 pb-12 min-h-screen flex items-center">
       <div className="container mx-auto px-4">
         <div className="max-w-md mx-auto">
-          <motion.div 
+          <motion.div
             className="bg-white rounded-xl shadow-lg p-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,9 +135,9 @@ const Signup = () => {
               <h1 className="text-3xl font-bold text-dark mb-2">Create Account</h1>
               <p className="text-gray-600">Join our food delivery service</p>
             </div>
-            
+
             {error && (
-              <motion.div 
+              <motion.div
                 className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
@@ -151,7 +146,7 @@ const Signup = () => {
                 {error}
               </motion.div>
             )}
-            
+
             <form onSubmit={handleSubmit}>
               <FormInput
                 id="name"
@@ -168,7 +163,7 @@ const Signup = () => {
                   </svg>
                 }
               />
-              
+
               <FormInput
                 id="email"
                 label="Email Address"
@@ -184,7 +179,7 @@ const Signup = () => {
                   </svg>
                 }
               />
-              
+
               <FormInput
                 id="password"
                 label="Password"
@@ -200,7 +195,7 @@ const Signup = () => {
                   </svg>
                 }
               />
-              
+
               <FormInput
                 id="confirmPassword"
                 label="Confirm Password"
@@ -216,7 +211,7 @@ const Signup = () => {
                   </svg>
                 }
               />
-              
+
               <div className="mb-6">
                 <label className="flex items-start">
                   <input
@@ -241,7 +236,7 @@ const Signup = () => {
                   <p className="mt-1 text-sm text-red-500">{formErrors.agreeTerms}</p>
                 )}
               </div>
-              
+
               <motion.button
                 type="submit"
                 className="btn-primary w-full py-3 mb-4"
@@ -250,7 +245,7 @@ const Signup = () => {
               >
                 Create Account
               </motion.button>
-              
+
               <p className="text-center text-gray-600 text-sm">
                 Already have an account?{' '}
                 <Link to="/login" className="text-primary font-medium hover:underline">

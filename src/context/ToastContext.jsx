@@ -13,21 +13,21 @@ export const ToastProvider = ({ children }) => {
   });
 
   // Show toast notification
-  const showToast = (message, type = 'success') => {
+  const showToast = React.useCallback((message, type = 'success') => {
     setToast({
       message,
       type,
       isVisible: true
     });
-  };
+  }, []);
 
   // Hide toast notification
-  const hideToast = () => {
+  const hideToast = React.useCallback(() => {
     setToast(prev => ({
       ...prev,
       isVisible: false
     }));
-  };
+  }, []);
 
   return (
     <ToastContext.Provider value={{ showToast }}>

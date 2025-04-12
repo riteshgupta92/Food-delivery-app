@@ -27,19 +27,12 @@ const Login = () => {
     password: ''
   });
 
-  // Redirect if already authenticated
+  // Clear any errors when component unmounts
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/');
-      showToast('You are already logged in', 'info');
-      navigate(from, { replace: true });
-    }
-
-    // Clear any previous errors
     return () => {
       dispatch(clearError());
     };
-  }, [isAuthenticated, navigate, dispatch, from]);
+  }, [dispatch]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
