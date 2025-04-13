@@ -2,7 +2,7 @@
 + ## TastyBites Food Delivery App
 +
 +    A beautiful, interactive, and responsive food delivery application built with React, Redux, and Tailwind CSS.
-+
++ ## Live Demo :- https://food-delivery-ejtplamoh-riteshgupta92s-projects.vercel.app/
 + ## Features
 +
 +  - **Beautiful UI with Tailwind CSS**: Custom styling with a cohesive color scheme and modern design
